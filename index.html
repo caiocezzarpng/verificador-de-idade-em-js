@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles\style.css" />
+    <title>Verificador de idade</title>
+  </head>
+  <body>
+    <div id="title"><h2>Verificador de Idade</h2></div>
+    <div id="wrap">
+      <div id="box">
+        <label for="number">Ano de Nascimento</label>
+        <input type="number" name="ano" id="ano" />
+        <br />
+        <br />
+        Sexo:
+        <input type="radio" name="sexo" id="homem" value="Homem" />
+        <label for="sexo">Masculino</label>
+        <input type="radio" name="sexo" id="mulher" value="Mulher" />
+        <label for="sexo">Feminino</label>
+        <br />
+        <br />
+        <button onclick="verificarIdade()">Enviar</button>
+        <br />
+        <br />
+        <p id="resultado">Preencha os dados acima para ver o resultado</p>
+        <img src="img-padrao" id="img" alt="" />
+      </div>
+    </div>
+    <div id="footer">
+      <h2>&#169<i>Caio César Sousa Bandeira</i></h2>
+    </div>
+
+    <script>
+      function verificarIdade() {
+        var ano = Number(document.getElementById("ano").value);
+        var sexo;
+        if (document.getElementById("homem").checked) {
+          var sexo = document.getElementById("homem").value;
+        } else if (document.getElementById("mulher").checked) {
+          var sexo = document.getElementById("mulher").value;
+        }
+
+        var dataAtual = new Date();
+        anoAtual = dataAtual.getFullYear();
+
+        var idade = anoAtual - ano;
+
+        var resultado = document.getElementById("resultado");
+        resultado.innerHTML = "Detectamos " + sexo + " de " + idade + " anos.";
+
+        chamarImagem(sexo, idade);
+      }
+
+      function chamarImagem(sexo, idade) {
+        if (sexo === "Homem" && idade < 18) {
+          document.getElementById("img").src = "img/img-garoto.jpg";
+          document.getElementById("img").style.visibility = "visible";
+        } else if (sexo === "Homem" && idade < 50) {
+          document.getElementById("img").src = "img/img-homem.jpg";
+          document.getElementById("img").style.visibility = "visible";
+        } else if (sexo === "Homem") {
+          document.getElementById("img").src = "img/img-homem-velho.jpg";
+          document.getElementById("img").style.visibility = "visible";
+        } else if (sexo === "Mulher" && idade < 18) {
+          document.getElementById("img").src = "img/img-garota.jpg";
+          document.getElementById("img").style.visibility = "visible";
+        } else if (sexo === "Mulher" && idade < 50) {
+          document.getElementById("img").src = "img/img-mulher.jpg";
+          document.getElementById("img").style.visibility = "visible";
+        } else if (sexo === "Mulher") {
+          document.getElementById("img").src = "img/img-mulher-velha.jpg";
+          document.getElementById("img").style.visibility = "visible";
+        }
+      }
+    </script>
+  </body>
+</html>
